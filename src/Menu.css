@@ -1,0 +1,46 @@
+.menu {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    top: 0;
+}
+
+.nav-link {
+    display: flex;
+    width: 100%;
+}
+
+.nav-link ul {
+    list-style-type: none;
+    padding-left: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+   
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+}
+
+
+.nav-link li a {
+    text-decoration: none;
+    color: white;
+    padding: 20px;
+}
+
+.nav-link li a:hover {
+    background-color: #1b1b1b;
+}
+
+.nav-link li {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-link img {
+    height: 30px;
+    margin-right: 10px;
+}
