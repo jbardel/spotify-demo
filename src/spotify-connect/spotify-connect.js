@@ -66,23 +66,14 @@ async function genToken(state, code) {
             SPOTIFY_EXCHANGE_TOKEN_URL,
             queryString.stringify(params), postConfig
         )
-        console.log(response.data)
         return response.data;
     } catch (err) {
         return { error: true }
     }
 }
 
-function saveToken(tokenData){
-    const {access_token, expires_in, refresh_token} = tokenData
-
-    localStorage.setItem(ACCESS_TOKEN_KEY, access_token)
-    localStorage.setItem(ACCESS_TOKEN_EXPIRES_KEY, expires_in)
-    localStorage.setItem(ACCESS_TOKEN_REFRESH_KEY, refresh_token)
-}
-
-function isConnected(){
+function isConnected() {
     return localStorage.getItem(ACCESS_TOKEN_KEY) != null
 }
 
-export { getAuthorizationURI, genToken, saveToken, isConnected,ACCESS_TOKEN_KEY };
+export { getAuthorizationURI, genToken, isConnected, ACCESS_TOKEN_KEY, ACCESS_TOKEN_EXPIRES_KEY, ACCESS_TOKEN_REFRESH_KEY };

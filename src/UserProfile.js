@@ -14,15 +14,16 @@ class UserProfile extends React.Component {
             profile_picture: null,
             url: null
         }
-
+        console.log("UserProfile constructor")
         this.spotifyApi.setAccessToken(localStorage.getItem(ACCESS_TOKEN_KEY))
     }
 
-
     componentDidMount() {
+
+        console.log("UserProfile componentDidMount")
         this.spotifyApi.getMe({}, null).then(res => {
             console.log("data", res)
-            const { display_name, images, external_urls : {
+            const { display_name, images, external_urls: {
                 spotify: url
             } } = res
             this.setState({

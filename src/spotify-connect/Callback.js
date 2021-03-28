@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { genToken, saveToken } from "./spotify-connect";
+import LoginContext from "../context/LoginContext";
+import { genToken } from "./spotify-connect";
 
 function getHashParams() {
     var hashParams = {};
@@ -14,7 +15,9 @@ function getHashParams() {
 }
 
 
-function Callback() {
+function Callback(props) {
+
+    const {setTokens} = useContext(LoginContext)
 
     const { error, code, state } = getHashParams();
     const history = useHistory();
@@ -28,10 +31,15 @@ function Callback() {
         if (tokenData.error) {
             msg = 'Acces token retrieve error'
         } else {
-            console.log(tokenData)
-            //save token
-            history.push('/')
-            saveToken(tokenData)
+            console.log("Sauvegarde token")
+            const { access_token, expires_in, refresh_token } = tokenData
+
+            setTokens({
+                accessToken: access_token, 
+                refreshToken: refresh_token,
+                expiresIn: expires_in
+            })
+            history.push("/")
         }
 
     })
