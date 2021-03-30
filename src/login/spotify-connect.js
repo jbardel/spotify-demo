@@ -2,6 +2,7 @@ import pkceChallenge from "pkce-challenge";
 import queryString from "querystring";
 import axios from "axios";
 import { v4 as uuid } from 'uuid';
+import { ACCESS_TOKEN } from "./LoginContext";
 
 const CLIENT_ID = "09496c9d036e4d3d92c47123451660b3";
 
@@ -11,10 +12,6 @@ const REDIRECT_URI = "http://localhost:3000/callback"
 
 const CODE_VERIFIER_KEY = 'code_verifier'
 const STATE_KEY = 'auth_state'
-
-const ACCESS_TOKEN_KEY = "access_token_key"
-const ACCESS_TOKEN_EXPIRES_KEY = "access_token_expires_key"
-const ACCESS_TOKEN_REFRESH_KEY = "access_token_refresh_key"
 
 function getAuthorizationURI() {
     //Add state
@@ -73,7 +70,7 @@ async function genToken(state, code) {
 }
 
 function isConnected() {
-    return localStorage.getItem(ACCESS_TOKEN_KEY) != null
+    return localStorage.getItem(ACCESS_TOKEN) != null
 }
 
-export { getAuthorizationURI, genToken, isConnected, ACCESS_TOKEN_KEY, ACCESS_TOKEN_EXPIRES_KEY, ACCESS_TOKEN_REFRESH_KEY };
+export { getAuthorizationURI, genToken, isConnected };

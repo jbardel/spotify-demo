@@ -6,12 +6,12 @@
     top: 0;
 }
 
-.nav-link {
+.navlink {
     display: flex;
     width: 100%;
 }
 
-.nav-link ul {
+.navlink ul {
     list-style-type: none;
     padding-left: 0;
     overflow: hidden;
@@ -24,23 +24,23 @@
 }
 
 
-.nav-link li a {
+.navlink li a {
     text-decoration: none;
     color: white;
     padding: 20px;
 }
 
-.nav-link li a:hover {
+.navlink li a:hover {
     background-color: #1b1b1b;
 }
 
-.nav-link li {
+.navlink li {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.nav-link img {
+.navlink img {
     height: 30px;
     margin-right: 10px;
 }

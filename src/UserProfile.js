@@ -1,32 +1,33 @@
-import React from "react"
+import React, { useContext, useEffect, useState } from "react"
 import SpotifyWebApi from "../node_modules/spotify-web-api-js/src/spotify-web-api";
-import { ACCESS_TOKEN_KEY } from "./spotify-connect/spotify-connect";
+import { LoginContext } from "./login/LoginContext";
 
-class UserProfile extends React.Component {
 
-    spotifyApi = new SpotifyWebApi();
+function UserProfile() {
 
-    constructor(props) {
-        super(props)
+    const { tokens } = useContext(LoginContext)
 
-        this.state = {
-            display_name: null,
-            profile_picture: null,
-            url: null
-        }
-        console.log("UserProfile constructor")
-        this.spotifyApi.setAccessToken(localStorage.getItem(ACCESS_TOKEN_KEY))
-    }
+    const [userProfile, setUserProfile] = useState({
+        display_name: null,
+        profile_picture: null,
+        url: null
+    })
 
-    componentDidMount() {
+    useEffect(() => {
 
-        console.log("UserProfile componentDidMount")
-        this.spotifyApi.getMe({}, null).then(res => {
+        const spotifyApi = new SpotifyWebApi()
+        spotifyApi.setAccessToken(tokens.accessToken)
+
+        spotifyApi.getMe({}, null).then(res => {
             console.log("data", res)
-            const { display_name, images, external_urls: {
-                spotify: url
-            } } = res
-            this.setState({
+            const { 
+                display_name, 
+                images, 
+                external_urls: {
+                    spotify: url
+                } 
+            } = res
+            setUserProfile({
                 display_name,
                 profile_picture: images[0].url,
                 url
@@ -34,20 +35,16 @@ class UserProfile extends React.Component {
         }, err => {
             console.log("err", err)
         })
-    }
+    })
 
-    render() {
-
-        return <div className="userProfile">
-            <img src={this.state.profile_picture} alt="Photo de profil" />
-            <div>{this.state.display_name}</div>
-            <div><a href={this.state.url}>{this.state.url}</a></div>
-            <button className="btn btn-primary">
-                Se déconnecter
-            </button>
-        </div>
-    }
-
+    return <div className="userProfile">
+        <img src={userProfile.profile_picture} alt="Photo de profil" />
+        <div>{userProfile.display_name}</div>
+        <div><a href={userProfile.url}>{userProfile.url}</a></div>
+        <button className="btn btn-primary">
+            Se déconnecter
+        </button>
+    </div>
 }
 
 export default UserProfile

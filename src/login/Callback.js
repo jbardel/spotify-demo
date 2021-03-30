@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import LoginContext from "../context/LoginContext";
+import { LoginContext } from "./LoginContext";
 import { genToken } from "./spotify-connect";
 
 function getHashParams() {

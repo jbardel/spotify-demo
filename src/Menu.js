@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SpotifyWebApi from "../node_modules/spotify-web-api-js/src/spotify-web-api";
-import LoginContext from "./context/LoginContext";
 import './Menu.css'
-import { getAuthorizationURI, isConnected } from "./spotify-connect/spotify-connect";
+import { getAuthorizationURI, isConnected } from "./login/spotify-connect";
+import { LoginContext } from "./login/LoginContext";
 
 function Menu() {
 
@@ -38,7 +38,7 @@ function Menu() {
     }, [tokens])
 
     return <div className="menu">
-        <nav className="nav-link">
+        <nav className="navlink">
             <ul>
                 <li>
                     <Link to="/">Home</Link>
